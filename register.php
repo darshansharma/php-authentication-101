@@ -47,11 +47,12 @@ if(isset($_POST["submit"])){
     $personFullName = $_POST["name"];
     $username = $_POST["username"];
     $userPassword = $_POST["password"];
+    $hashedUserPassword = password_hash($userPassword,PASSWORD_DEFAULT);
     $userimgPath = $_POST["our_file"];
     $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
     $userId = "user_".$uuid;
 
-    $query = `INSERT INTO users (userId,name,username,passwordHash) VALUES ($userId,$personFullName,$username,$userPassword)`;
+    $query = "INSERT INTO users (userId,name,username,passwordHash) VALUES ('".$userId."','".$personFullName."','".$username."','".$hashedUserPassword."');";
 
     echo $query;
 
