@@ -5,6 +5,25 @@
     <meta charset="utf-8">
     <title> login page </title>
     <link rel="stylesheet" href="login.css">
+    <script>
+
+    function validateFields() {
+        document.getElementById("statusMsg").innerText = "";
+        
+        let username = document.getElementById("username").value;
+        let userPassword = document.getElementById("password").value;
+
+        if(username === ""){
+            document.getElementById("statusMsg").textContent = "Please write your username";
+            return false;
+        }
+        if(userPassword === ""){
+            document.getElementById("statusMsg").textContent = "Please write a password";
+            return false;
+        }
+        return true;
+    }
+    </script>
 </head>
 
 
@@ -12,12 +31,12 @@
     <div class="center">
         <h1> LOGIN </h1>
 
-        <form method="post">
+        <form method="post" onsubmit="return validateFields()" action="<?=$_SERVER['PHP_SELF'];?>">
             Username: <input type="text" name="username"> <br> <br>
             Password: <input type="password" name="password"> <br> <br>
+            <p id="statusMsg" style="color:red;"> </p> <br><br >
             <input type="submit" name="submit" value="LOGIN">
             <p> Not registered . <a href="register.php"> Click here to register</a> </p> <br> <br>
-            <p class = "status" color="red"> <?php  echo $errorMessage  ?>  </p>
         </form>
     </div>
 </body>
@@ -54,9 +73,6 @@ try {
     echo $th;
 }
     
-} else {
-
-    echo "form in progress";
 }
 
 ?>
