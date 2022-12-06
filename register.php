@@ -1,3 +1,6 @@
+<?php
+    $statusMessage = "";
+?>
 <!Doctype html>
 <html lang="en">
 
@@ -19,6 +22,7 @@
             Confirmpassword: &nbsp;<input type="password" name="password"> <br> <br>
             Picture: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="our_file"> <br> <br>
            <div class ="submitButton"> <input type="submit" value="Register" name = "submit"> </div> <br> <br>
+           <p class="status"> <?php echo $statusMessage ?> </p> 
         </form>
     </div>
 </body>
@@ -29,21 +33,8 @@
 
 if(isset($_POST["submit"])){
 
+    include("db.php");
 
-    $servername = "localhost";
-    $dbUsername = "sanjeev123";
-    $password = "sanjeev123!@#";
-    $dbname = "assignment5";
-
-    $conn = mysqli_connect($servername, $dbUsername, $password,$dbname);
-
-
-    if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-    }
-    // echo "Connected successfully";
-
-   
     $personFullName = $_POST["name"];
     $username = $_POST["username"];
     $userPassword = $_POST["password"];
@@ -56,10 +47,14 @@ if(isset($_POST["submit"])){
 
     echo $query;
 
-    if (mysqli_query($conn, $query)) {
-        echo "New user added successfully";
+    if (mysqli_query($db, $query)) {
+        $statusMessage = "New user added successfully";
+        $_SESSION['login_user'] = $username;
+        header("profile.php");
     } else {
-        echo "Error: " .$query . "<br>" . mysqli_error($conn);
+        echo "Error: " .$query . "<br>" . mysqli_error($db);
+        $err = mysqli_error($db);
+        $statusMessage = $err;
     }
 }
 
@@ -67,8 +62,4 @@ else {
 
     echo "form in progress";
 }
-// echo $personFullName;
-// echo $username;
-// echo $userPassword;
-// echo $userimgPath;
 ?>
