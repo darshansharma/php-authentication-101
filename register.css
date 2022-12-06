@@ -1,35 +1,73 @@
 body {
-    background: linear-gradient(120deg, #2980b9, #8e44ad)
+    background: linear-gradient(120deg, #2980b9, #8e44ad);
 }
 
 .center {
-
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: white;
     border-radius: 10px;
-    width: 400px;
+    width: 40%;
 }
 
 .center h1 {
-
     text-align: center;
-
 }
 
-.center form {
-
+/* .center form {
     padding: 0 40px;
-}
+} */
 
 .submitButton {
-    display:inline-block;
+    display: inline-block;
     text-align: center;
     margin: 0 auto;
 }
 
+.submitButton:hover {
+    cursor: pointer;
+}
+
 #statusMsg {
     color: red;
+}
+#register-form {
+    display: flex;
+}
+form > div {
+    margin: 3%;
+}
+form > div > label {
+    left:10%;
+    position: absolute;
+}
+
+form > div > input{
+    right:10%;
+    position: absolute;
+    width:50%;
+}
+form > div:last-child {
+    margin-bottom: 5%;
+}
+form > div > #file {
+    right:10%;
+    position: absolute;
+    width:50%;
+}
+
+input[type=submit] {
+    width: 30%;
+    cursor: pointer;
+    padding: 1%;
+}
+
+#avatar {
+    width: 30%;
+    height: auto;
+    border-radius: 10%;
+    left: 20%;
+    position: relative;
 }

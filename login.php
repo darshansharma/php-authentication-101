@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title> login page </title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="register.css">
     <script>
 
     function validateFields() {
@@ -14,11 +14,11 @@
         let userPassword = document.getElementById("password").value;
 
         if(username === ""){
-            document.getElementById("statusMsg").textContent = "Please write your username";
+            document.getElementById("statusMsg").textContent = "Error: Please write your username";
             return false;
         }
         if(userPassword === ""){
-            document.getElementById("statusMsg").textContent = "Please write a password";
+            document.getElementById("statusMsg").textContent = "Error: Please write a password";
             return false;
         }
         return true;
@@ -30,14 +30,15 @@
 <body>
     <div class="center">
         <h1> LOGIN </h1>
-
-        <form method="post" onsubmit="return validateFields()" action="<?=$_SERVER['PHP_SELF'];?>">
-            Username: <input type="text" name="username"> <br> <br>
-            Password: <input type="password" name="password"> <br> <br>
-            <p id="statusMsg" style="color:red;"> </p> <br><br >
-            <input type="submit" name="submit" value="LOGIN">
-            <p> Not registered . <a href="register.php"> Click here to register</a> </p> <br> <br>
+        <div class="register-form">
+        <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" onsubmit="return validateFields()" enctype="multipart/form-data">
+            <div><label>Username: </label><input type="text" name="username" id="username"> <br> <br></div>
+            <div><label>Password: </label><input type="password" name="password" id="password"> <br> <br></div>
+            <div><label></label><input type="submit" name="submit" value="Login"></div>
+            <div><label></label><p id="statusMsg" style="color:red;"> </p> <br><br ></div>
+            <div><label></label><p> Not registered . <a href="register.php"> Click here to register</a> </p> <br> <br></div>
         </form>
+        </div>
     </div>
 </body>
 
@@ -49,20 +50,21 @@
 
 if (isset($_POST["submit"])) {
     include("db.php");
+    
+try {
     $username = $_POST["username"];
     $userPassword = $_POST["password"];
     $hashedUserPassword = password_hash($userPassword, PASSWORD_DEFAULT);
-    
-    session_start();
-    $query = "SELECT passwordHash FROM  users WHERE username='" . $username . "' ;";
-try {
+    $query = "SELECT * FROM  users WHERE username='" . $username . "' ;";
     $result = mysqli_query($db, $query);
-    $row = mysqli_fetch_row($result);
-    $isPasswordRight = password_verify($userPassword, $row[0]);
+    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    echo $query;
+    $isPasswordRight = password_verify($userPassword, $row['passwordHash']);
+    session_start();
     $count = mysqli_num_rows($result);
     if ($count == 1 && $isPasswordRight == "success") {
         echo "success";
-        $_SESSION['login_user'] = $username;
+        $_SESSION['login_user'] = $row['userId'];
         
           header("location: profile.php");
     } else {
