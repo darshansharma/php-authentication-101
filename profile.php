@@ -11,6 +11,15 @@ include('session.php');
     <meta charset="utf-8">
     <title> PROFILE </title>
     <!-- <link rel="stylesheet" href="profile.css"> -->
+    <style>
+        #avatar {
+            width: 10%;
+            height: auto;
+            border-radius: 10%;
+            position: relative;
+            left:50%;
+        }
+    </style>
 </head>
 
 
@@ -22,6 +31,8 @@ include('session.php');
             <div class="empty-div" style="flex: 1;"></div>
         </div>
         <h3 style="text-align:center;">Welcome to the metaverse 0.1</h3>
+        <img src=<?php echo "'$user_image'" ?> id="avatar" />
+
         <!-- <img src = "https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png" width=200, height=200> -->
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
         <p>Eget velit aliquet sagittis id consectetur purus ut. Id volutpat lacus laoreet non curabitur gravida arcu ac tortor. Nulla pellentesque dignissim enim sit amet venenatis urna. Lorem ipsum dolor sit amet consectetur adipiscing. Leo duis ut diam quam. Nunc eget lorem dolor sed viverra ipsum nunc aliquet bibendum. Nibh venenatis cras sed felis eget velit aliquet sagittis id. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et. Nunc non blandit massa enim nec dui. Viverra justo nec ultrices dui sapien eget mi proin.</p>
