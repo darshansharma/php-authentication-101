@@ -1,5 +1,5 @@
 # php-authentication-101
-Login, Logout and Registration and session implmented in this repository
+Login, Logout and Registration and session implmented for the beginners.
 
 ## Frontend
 HTML5, CSS3 And Vanilla JavaScript is used. 
@@ -18,22 +18,22 @@ mySQL is used.
 5. Using VS Code is recommended but not necessary.
 
 ## Sample Pages
-[login-page](./uploads/login.jpg)
-[profile-page](./uploads/profile.jpg)
+![registration-page](uploads/registration.png)
+![profile-page](uploads/profile.png)
 
 ## Implementations done - 
-[1]: Login
-[2]: Logout
-[3]: Registration
-[4]: Authentication
-[5]: Session maintained using PHP Session
-[6]: Admin Panel for Adminstration
+[1]  Login
+[2]  Logout
+[3]  Registration
+[4]  Authentication
+[5]  Session maintained using PHP Session
+[6]  Admin Panel for Adminstration
 
 ## Need to implement also
-[1]: Profile Page CSS
-[2]: Moving to CSS flexbox from positions
-[3]: Ability to add friends
-[4]: Scalability Testing
+[1]  Profile Page CSS
+[2]  Moving to CSS flexbox from positions
+[3]  Ability to add friends
+[4]  Scalability Testing
 
 ## Contributions
 1. Sanjeev Prabhakar

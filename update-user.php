@@ -5,8 +5,7 @@ $sql = "UPDATE users SET name='$_POST[newName]', username='$_POST[newUsername]' 
 echo $sql;
 if (mysqli_query($db, $sql)) {
     
-    // header("location: adminpanel.php");
-    echo "<script>alert(Record updated successfully);</script>";
+    header("location: adminpanel.php");
     
 } else {
     echo "Error deleting record: " . mysqli_error($conn);

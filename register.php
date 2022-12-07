@@ -83,36 +83,14 @@ if (isset($_POST["submit"])) {
     try {
         if ($_FILES["our_file"]["size"] > 50000) {
             $statusMessage = "Sorry, your file is too large.";
-            throw $statusMessage;
+            echo $statusMessage;
         }
-
-
         try {
-            $target_dir = "/Library/WebServer/Documents/";
+            $target_dir = "uploads/";
             $target_file = $target_dir . basename($_FILES["our_file"]["name"]);
-            $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-            if (
-                $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                && $imageFileType != "gif"
-            ) {
-                $statusMessage = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-                throw "Sorry, only JPG, JPEG, PNG & GIF files are allowed";
-                $uploadOk = 0;
-            }
-            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-            if ($check !== false) {
-                echo "File is an image - " . $check["mime"] . ".";
-                $uploadOk = 1;
-            } else {
-                $statusMessage = "File is not an image.";
-                throw "File is not an image";
-                $uploadOk = 0;
-            }
             move_uploaded_file($_FILES["our_file"]["tmp_name"], $target_file);
         } catch (\Throwable $th) {
             echo "Error Occured while uploading image\n";
-            $statusMessage = $th;
         }
 
         $personFullName = $_POST["name"];
@@ -125,10 +103,11 @@ if (isset($_POST["submit"])) {
 
         $query = "INSERT INTO users (userId,name,username,passwordHash) VALUES ('" . $userId . "','" . $personFullName . "','" . $username . "','" . $hashedUserPassword . "');";
 
-        $query2 = "INSERT INTO pictures (userId, imagePath) VALUES ('" . $userId . "','" . $target_file . "';)";
+        $query2 = "INSERT INTO pictures (userId, imagePath) VALUES ('" . $userId . "','" . $target_file . "');";
 
-        if (mysqli_query($db, $query) && mysqli_query($db, $query2)) {
+        if (mysqli_query($db, $query)) {
             $statusMessage = "New user added successfully";
+            mysqli_query($db, $query2);
             $_SESSION['login_user'] = $username;
             header("location: profile.php");
         } else {
